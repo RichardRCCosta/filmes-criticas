@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies Now Showing</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Filmes</h1>
+    </header>
+    <main>
+        <section id="movies-now-showing">
+            <h2>Adicionados</h2>
+            <div id="movies-grid">
+                <!-- Filmes em cartaz serão adicionados aqui -->
+            </div>
+        </section>
+    </main>
+    <script>
+        const movies = [
+            { id: 1, title: "Filme 1", image: "movie1.png" },
+            { id: 2, title: "Filme 2", image: "movie2.jpg" },
+            { id: 3, title: "Filme 3", image: "movie3.jpg" }
+        ];
+
+        const moviesGrid = document.getElementById('movies-grid');
+
+        movies.forEach(movie => {
+            const movieDiv = document.createElement('div');
+            movieDiv.classList.add('movie-item');
+
+            const movieLink = document.createElement('a');
+            movieLink.href = `movie.html?id=${movie.id}`;
+
+            const movieImage = document.createElement('img');
+            movieImage.src = movie.image;
+            movieImage.alt = movie.title;
+
+            movieLink.appendChild(movieImage);
+            movieDiv.appendChild(movieLink);
+            moviesGrid.appendChild(movieDiv);
+        });
+    </script>
+</body>
+</html>

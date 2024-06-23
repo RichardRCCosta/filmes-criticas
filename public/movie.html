@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1 id="movie-title">Movie Details</h1>
+    </header>
+    <main>
+        <section id="movie-details">
+            <img id="movie-image" src="" alt="Movie Image">
+            <h2>Leave a Review</h2>
+            <form id="review-form">
+                <label for="rating">Rating:</label>
+                <div id="star-rating">
+                    <!-- Estrelas serão geradas aqui -->
+                </div>
+                <input type="text" id="review-comment" placeholder="Your comment" required>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+        <section id="comments-section">
+            <h2>Comments</h2>
+            <div id="comments-list">
+                <!-- Comentários serão adicionados aqui -->
+            </div>
+        </section>
+    </main>
+    <script src="scripts.js"></script>
+    <script>
+        // Obtendo o parâmetro 'id' da URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const movieId = urlParams.get('id');
+
+        // Array de filmes (simulando dados)
+        const movies = [
+            { id: 1, title: "Filme 1", image: "movie1.png" },
+            { id: 2, title: "Filme 2", image: "movie2.jpg" },
+            { id: 3, title: "Filme 3", image: "movie3.jpg" }
+        ];
+
+        // Encontrar o filme correspondente ao 'id' passado
+        const selectedMovie = movies.find(movie => movie.id === parseInt(movieId));
+
+        if (selectedMovie) {
+            // Atualizar o título do filme
+            document.getElementById('movie-title').innerText = selectedMovie.title;
+            
+            // Atualizar a imagem do filme
+            const movieImage = document.getElementById('movie-image');
+            movieImage.src = selectedMovie.image;
+            movieImage.alt = selectedMovie.title;
+        }
+    </script>
+</body>
+</html>
