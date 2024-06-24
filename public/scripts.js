@@ -29,6 +29,7 @@ if (window.location.pathname.includes('movie.html')) {
         star.innerHTML = '★';
         star.dataset.rating = i;
 
+        // Removendo evento de 'mouseover'
         star.addEventListener('click', () => {
             document.querySelectorAll('#star-rating span').forEach(s => {
                 s.style.color = parseInt(s.dataset.rating) <= i ? 'gold' : '#ddd';
@@ -57,7 +58,7 @@ if (window.location.pathname.includes('movie.html')) {
 }
 
 function loadComments(movieId) {
-    fetch(`https://filmes-criticas-production.up.railway.app/api/comments/${movieId}`)
+    fetch(`/api/comments/${movieId}`)
         .then(response => response.json())
         .then(data => {
             const commentsList = document.getElementById('comments-list');
@@ -85,12 +86,11 @@ function loadComments(movieId) {
 
                 commentsList.appendChild(commentDiv);
             });
-        })
-        .catch(error => console.error('Error fetching comments:', error));
+        });
 }
 
 function addComment(movieId, rating, text) {
-    fetch('https://filmes-criticas-production.up.railway.app/api/comments', {
+    fetch('/api/comments', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -100,12 +100,11 @@ function addComment(movieId, rating, text) {
     .then(response => response.json())
     .then(data => {
         loadComments(movieId);
-    })
-    .catch(error => console.error('Error adding comment:', error));
+    });
 }
 
 function deleteComment(commentId, commentDiv) {
-    fetch(`https://filmes-criticas-production.up.railway.app/api/comments/${commentId}`, {
+    fetch(`/api/comments/${commentId}`, {
         method: 'DELETE'
     })
     .then(response => response.json())
@@ -113,6 +112,5 @@ function deleteComment(commentId, commentDiv) {
         if (data.deleted) {
             commentDiv.remove();
         }
-    })
-    .catch(error => console.error('Error deleting comment:', error));
+    });
 }
